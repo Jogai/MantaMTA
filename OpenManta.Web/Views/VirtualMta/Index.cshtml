@@ -6,7 +6,7 @@
 <script type="text/javascript">
 	function Delete(id) {
 		if (confirm("Delete the Virtual MTA?")) {
-			PostToWebService("/services/VirtualMtaService.asmx/Delete", "{ 'id':'" + id + "'}",
+			PostToWebService("/api/VirtualMta/Delete", "{ 'id':'" + id + "'}",
 				function (data) {
 					window.location = '/VirtualMTA';
 				},
@@ -19,7 +19,7 @@
 
 	function DeleteGroup(id) {
 		if (confirm("Delete the Virtual MTA Group?")) {
-			PostToWebService("/services/VirtualMtaService.asmx/DeleteGroup", "{ 'id':'" + id + "'}",
+			PostToWebService("/api/VirtualMta/DeleteGroup", "{ 'id':'" + id + "'}",
 				function (data) {
 					window.location = '/VirtualMTA';
 				},

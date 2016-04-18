@@ -5,13 +5,13 @@
 
 <script type="text/javascript">
 	function Save() {
-		PostToWebService("/services/VirtualMtaService.asmx/Save", "{ 'id':'@Model.ID',\
+		PostToWebService("/api/VirtualMta/Save", "{ 'id':'@Model.ID',\
 					 'hostname':'" + $('#txtHostname').val() + "',\
 					 'ipAddress':'" + $('#txtIpAddress').val() + "',\
 					 'inbound':'" + $('#ckbInbound').is(':checked') + "',\
 					 'outbound':'" + $('#ckbOutbound').is(':checked') + "'}",
 			function (data) {
-				if (data.d)
+				if (data)
 					window.location = '/VirtualMTA';
 				else
 					alert("Save failed!");
