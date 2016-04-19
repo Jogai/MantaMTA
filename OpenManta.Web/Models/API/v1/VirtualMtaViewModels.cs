@@ -1,5 +1,8 @@
 ﻿namespace WebInterface.Models.API.v1
-{ 
+{
+    /// <summary>
+	/// Summary description for SaveVirtualMtaViewModel
+	/// </summary> 
     public class SaveVirtualMtaViewModel
     {
         /// <summary>

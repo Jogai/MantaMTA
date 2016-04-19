@@ -1,5 +1,8 @@
 ﻿namespace WebInterface.Models.API.v1
 {
+    /// <summary>
+	/// Summary description for UpdateSettingsViewModel
+	/// </summary>
     public class UpdateSettingsViewModel
     {
         /// <summary>
