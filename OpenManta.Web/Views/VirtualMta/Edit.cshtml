@@ -5,7 +5,7 @@
 
 <script type="text/javascript">
 	function Save() {
-		PostToWebService("/api/VirtualMta/Save", "{ 'id':'@Model.ID',\
+		PostToWebService("/api/v1/VirtualMta/Save", "{ 'id':'@Model.ID',\
 					 'hostname':'" + $('#txtHostname').val() + "',\
 					 'ipAddress':'" + $('#txtIpAddress').val() + "',\
 					 'inbound':'" + $('#ckbInbound').is(':checked') + "',\

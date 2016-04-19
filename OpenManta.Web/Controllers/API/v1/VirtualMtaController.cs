@@ -3,25 +3,18 @@ using System.Linq;
 using System.Net;
 using System.Web.Http;
 using OpenManta.Core;
-using OpenManta.WebLib;
 using OpenManta.Data;
-using WebInterface.Models;
+using OpenManta.WebLib;
+using WebInterface.Models.API.v1;
 
-namespace WebInterface.Controllers.API
+namespace WebInterface.Controllers.API.v1
 {
     /// <summary>
-	/// Summary description for VirtualMtaService
+	/// Summary description for VirtualMta API
 	/// </summary>
 	[RoutePrefix("api/VirtualMta")]
     public class VirtualMtaController : ApiController
-    {
-        [HttpGet]
-        [Route("Save")]
-        public bool Save()
-        {
-            return true;
-        }
-        
+    {        
         /// <summary>
         /// Updates an existing Virtual MTA.
         /// </summary>
@@ -29,7 +22,7 @@ namespace WebInterface.Controllers.API
         /// <returns>TRUE if updated or FALSE if update failed.</returns>
         [HttpPost]
         [Route("Save")]
-        public bool Save(SaveViewModel viewModel)
+        public bool Save(SaveVirtualMtaViewModel viewModel)
         {
             VirtualMTA vMTA = null;
 
@@ -68,7 +61,7 @@ namespace WebInterface.Controllers.API
 		/// <param name="viewModel"></param>
 		[HttpPost]
         [Route("Delete")]
-        public void Delete(DeleteViewModel viewModel)
+        public void Delete(DeleteVirtualMtaViewModel viewModel)
         {
             OpenManta.WebLib.DAL.VirtualMtaDB.Delete(viewModel.Id);
         }
@@ -80,7 +73,7 @@ namespace WebInterface.Controllers.API
 		/// <returns>TRUE if saved or FALSE if not saved.</returns>
 		[HttpPost]
         [Route("SaveGroup")]
-        public bool SaveGroup(SaveGroupViewModel viewModel)
+        public bool SaveGroup(SaveVirtualMtaGroupViewModel viewModel)
         {
             VirtualMtaGroup grp = null;
             if (viewModel.Id == WebInterfaceParameters.VIRTUALMTAGROUP_NEW_ID)
@@ -110,10 +103,10 @@ namespace WebInterface.Controllers.API
         /// <summary>
 		/// Deletes a Virtual MTA Group.
 		/// </summary>
-		/// <param name="id">ID of the Virtual MTA Group to delete.</param>
+		/// <param name="viewModel">ID of the Virtual MTA Group to delete.</param>
 		[HttpPost]
         [Route("DeleteGroup")]
-        public void DeleteGroup(DeleteGroupViewModel viewModel)
+        public void DeleteGroup(DeleteVirtualMtaGroupViewModel viewModel)
         {
             VirtualMtaWebManager.DeleteGroup(viewModel.Id);
         }

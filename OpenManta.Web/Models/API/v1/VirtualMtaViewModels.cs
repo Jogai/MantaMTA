@@ -1,6 +1,6 @@
-﻿namespace WebInterface.Models
+﻿namespace WebInterface.Models.API.v1
 { 
-    public class SaveViewModel
+    public class SaveVirtualMtaViewModel
     {
         /// <summary>
         /// ID of the virtual MTA.
@@ -28,7 +28,7 @@
         public bool Outbound { get; set; }
     }
 
-    public class DeleteViewModel
+    public class DeleteVirtualMtaViewModel
     {
         /// <summary>
 		/// ID of the Virtual MTA to delete.
@@ -36,7 +36,7 @@
         public int Id { get; set; }
     }
 
-    public class SaveGroupViewModel
+    public class SaveVirtualMtaGroupViewModel
     {
         /// <summary>
         /// ID of the Virtual MTA Group to save.
@@ -59,7 +59,7 @@
         public int[] MtaIDs { get; set; }
     }
 
-    public class DeleteGroupViewModel
+    public class DeleteVirtualMtaGroupViewModel
     {
         /// <summary>
 		/// ID of the Virtual MTA Group to delete.
