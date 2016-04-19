@@ -5,7 +5,7 @@
 
 <script type="text/javascript">
 	function Save() {
-		PostToWebService("/services/settingsservice.asmx/Update", "{ 'clientIdleTimeout':'" + $('#txtClientIdleTimeout').val() + "',\
+		PostToWebService("/api/v1/Settings/Update", "{ 'clientIdleTimeout':'" + $('#txtClientIdleTimeout').val() + "',\
 																	 'receiveTimeout':'" + $('#txtReveiveTimeout').val() + "',\
 																	 'sendTimeout':'" + $('#txtSendTimeout').val() + "',\
 																	 'defaultVirtualMtaGroupID':'" + $('#ddlDefaultVirtualMtaGroup').val() + "',\
@@ -17,7 +17,7 @@
 																	 'returnPathLocalDomainID':'" + $('#ddlDefaultReturnPathLocalDomain').val() + "',\
 																	 'localDomains':" + JSON.stringify($('#txtLocalDomains').val().split('\n')).replace(/"/gi, "'") + "}",
 			function (data) {
-				if (data.d)
+				if (data)
 					window.location = window.location;
 				else
 					alert('Failed to save');

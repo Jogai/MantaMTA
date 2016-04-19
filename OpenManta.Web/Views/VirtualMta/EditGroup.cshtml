@@ -15,13 +15,13 @@
 			return;
 		}
 
-		PostToWebService("/services/VirtualMtaService.asmx/SaveGroup", 
+		PostToWebService("/api/v1/VirtualMta/SaveGroup", 
 			"{ 'id':'" + @Model.VirtualMtaGroup.ID + "',\
 'name':'" + $('#txtName').val() + "',\
 'description':'" + $('#txtDescription').val() + "',\
 'mtaIDs':" + JSON.stringify(mtas) + "}",
 			function (data) {
-				if (data.d)
+				if (data)
 					window.location = '/VirtualMTA';
 				else
 					alert('Save failed');
