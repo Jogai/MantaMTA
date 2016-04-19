@@ -12,7 +12,7 @@ namespace WebInterface.Controllers.API.v1
     /// <summary>
 	/// Summary description for VirtualMta API
 	/// </summary>
-	[RoutePrefix("api/VirtualMta")]
+	[RoutePrefix("api/v1/VirtualMta")]
     public class VirtualMtaController : ApiController
     {        
         /// <summary>

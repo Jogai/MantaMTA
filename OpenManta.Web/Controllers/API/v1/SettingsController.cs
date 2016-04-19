@@ -12,7 +12,7 @@ namespace WebInterface.Controllers.API.v1
     /// <summary>
 	/// Summary description for Settings API
 	/// </summary>
-    [RoutePrefix("api/Settings")]
+    [RoutePrefix("api/v1/Settings")]
     public class SettingsController : ApiController
     {
         /// <summary>
