@@ -71,7 +71,6 @@ table tbody tr td:hover { cursor: pointer; }
 table tbody tr td.td-right { text-align: right; }
 td input[type="checkbox"] { margin: 0; }
 
-
 #form-master-search { margin: 0; }
 #input-master-search { padding: 0 6px; font-size: 10.5px; }
 
@@ -587,3 +586,57 @@ background-image: url("/img/glyphicons-halflings.png") !important;
 background-image: url("/img/glyphicons-halflings-white.png") !important;
 }
 
+#channel-menu {
+    margin-top: 0px;
+}
+
+.tile, .label, :not(.btn-group) > .btn {
+    border-radius: 3px !important;
+}
+
+.btn-group .btn:first-of-type {
+    border-top-left-radius: 3px !important;
+    border-bottom-left-radius: 3px !important;
+}
+
+.btn-group .btn:last-of-type {
+    border-top-right-radius: 3px !important;
+    border-bottom-right-radius: 3px !important;
+}
+
+table.jqplot-table-legend {
+    border: 0px;
+}
+
+.jqplot-table-legend {
+    float: left;
+}
+
+div.jqplot-table-legend-swatch-outline {
+    border: 0px;
+}
+
+div.jqplot-table-legend-swatch {
+    border-radius: 12px !important;
+}
+
+td.jqplot-table-legend.jqplot-table-legend-swatch {
+    padding-top: 4px !important;
+}
+
+#channel, #app-body, #app-body > .row-fluid {
+    height: 100%;
+}
+
+#channel {
+    background: #fff;
+}
+
+body, html, #system-head, #channel-menu ul.nav.nav-list li a {
+    background: #105e7c;
+}
+
+#channel-menu > .sidebar-nav {
+    background-color: #80b8d8;
+    height: 100%;
+}

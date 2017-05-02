@@ -1,103 +1,95 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<title>MantaMTA - @ViewBag.Title</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <title>MantaMTA - @ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-@Styles.Render("~/resources/css/bootstrap")
-@Styles.Render("~/resources/css/jqplot")
+    <script src="//cdn.jsdelivr.net/g/jquery@1.12.4,jqplot@1.0.8,bootstrap@2.3.2"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/g/bootstrap@2.3.2(css/bootstrap-responsive.min.css+css/bootstrap.min.css),jqplot@1.0.8(jquery.jqplot.min.css)">
+    <link href="~/Content/app.css" rel="stylesheet"/>
+    <link href="~/Content/fonts.css" rel="stylesheet"/>
 
-@Scripts.Render("~/resources/js/jquery")
-@Scripts.Render("~/resources/js/bootstrap")
-@Scripts.Render("~/resources/js/jqplot")
-	
-	<script type="text/javascript">
-		$(document).ready(function () {
-			$('#channel-content').css('min-height', $('#channel-menu').height());
-		});
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#channel-content').css('min-height', $('#channel-menu').height());
+        });
 
-		/*	Function to make calling web services cleaner.
-		 	url: URL of the webapi [/api/v1/Controller/Method]
-		 	data: data to post [{"id":"1"}]
-		 	success(data): Callback for success
-		 	error(jqXHR, textStatus, errorThrown): Callback for error	*/
-		function PostToWebService(url, data, success, error) {
-			$.ajax({
-				type: "POST",
-				data: data,
-				dataType: "json",
-				url: url,
-				contentType: "application/json; charset=utf-8",
-				success: success,
-				error: error
-			});
-		}
-	</script>
-	<style type="text/css">
-		#channel-menu{margin-top:0px;}
-		.tile, .label, :not(.btn-group) > .btn {border-radius: 3px !important;}
-		.btn-group .btn:first-of-type {
-			border-top-left-radius: 3px !important;
-			border-bottom-left-radius: 3px !important;
-		}
-		.btn-group .btn:last-of-type{
-			border-top-right-radius: 3px !important;
-			border-bottom-right-radius: 3px !important;
-		}
-
-		table.jqplot-table-legend { border: 0px; }
-		.jqplot-table-legend { float:left; }
-		div.jqplot-table-legend-swatch-outline{ border:0px; }
-		div.jqplot-table-legend-swatch { border-radius: 12px !important; }
-		td.jqplot-table-legend.jqplot-table-legend-swatch{padding-top: 4px!important;}
-
-		#channel,#app-body, #app-body>.row-fluid {height:100%;}
-		#channel{background: #fff;}
-		body, html, #system-head, #channel-menu ul.nav.nav-list li a {background:#105e7c;}
-
-		#channel-menu>.sidebar-nav {background-color: #80b8d8; height:100%;}
-	</style>
+        /*	Function to make calling web services cleaner.
+             url: URL of the webapi [/api/v1/Controller/Method]
+             data: data to post [{"id":"1"}]
+             success(data): Callback for success
+             error(jqXHR, textStatus, errorThrown): Callback for error	*/
+        function PostToWebService(url, data, success, error) {
+            $.ajax({
+                type: "POST",
+                data: data,
+                dataType: "json",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                success: success,
+                error: error
+            });
+        }
+    </script>
 </head>
 <body>
-	<div id="system-head" class="container-fluid">
-		<div class="row-fluid">
-			<div id="system-head-left" class="span6">
-				<span id="manta-logo"></span>
-			</div>
-			<div id="system-head-right" class="span6">
-				<a href="javascript:void(0);">@DateTime.UtcNow.ToString("HH:mm dd MMM yy")</a>
-				<a href="/Settings"><i class="icon-cog icon-white"></i></a>
-			</div>
-		</div>
-	</div>
-	
-	<div id="app-body" class="container-fluid">
-		<div class="row-fluid">
-			<div id="channel-menu" class="span2">
-				<div class="sidebar-nav">
-					<ul class="nav nav-list">
-						<li @(Request.Url.PathAndQuery.StartsWith("/dashboard", StringComparison.OrdinalIgnoreCase) ?"class=active":string.Empty)><a href="/Dashboard"><i class="icon-th-large"></i> Dashboard</a></li>
-						<li @(Request.Url.PathAndQuery.StartsWith("/RabbitMQ", StringComparison.OrdinalIgnoreCase) ? "class=active" : string.Empty)><a href="/RabbitMQ"><i class="icon-chevron-right"></i> RabbitMQ</a></li>
-						<li @(Request.Url.PathAndQuery.Equals("/Sends/Queue", StringComparison.OrdinalIgnoreCase) ?"class=active":string.Empty)><a href="/Sends/Queue"><i class="icon-time"></i> Queue</a></li>
-						<li @(Request.Url.PathAndQuery.StartsWith("/Sends", StringComparison.OrdinalIgnoreCase) &&
-								!Request.Url.PathAndQuery.Equals("/Sends/Queue") ?"class=active":string.Empty)><a href="/Sends"><i class="icon-random"></i> Sends</a></li>
-						<li @(Request.Url.PathAndQuery.StartsWith("/Bounces", StringComparison.OrdinalIgnoreCase) ?"class=active":string.Empty)><a href="/Bounces"><i class="icon-remove"></i> Bounces</a></li>
-						<li @(Request.Url.PathAndQuery.StartsWith("/VirtualMTA", StringComparison.OrdinalIgnoreCase) ?"class=active":string.Empty)><a href="/VirtualMTA"><i class="icon-envelope"></i> Virtual MTAs</a></li>
-						<li @(Request.Url.PathAndQuery.StartsWith("/OutboundRules", StringComparison.OrdinalIgnoreCase) ?"class=active":string.Empty)><a href="/OutboundRules"><i class="icon-adjust"></i> Outbound Rules</a></li>
-						<li @(Request.Url.PathAndQuery.StartsWith("/ServerStatus", StringComparison.OrdinalIgnoreCase) ?"class=active":string.Empty)><a href="/ServerStatus"><i class="icon-tasks"></i> Server Status</a></li>
-					</ul>
-				</div>
-			</div>
-			
-			<div id="channel" class="span10">
-				<div id="channel-content">					
-					<div class="row-fluid">
-						@RenderBody()								
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div id="system-head" class="container-fluid">
+        <div class="row-fluid">
+            <div id="system-head-left" class="span6">
+                <span id="manta-logo"></span>
+            </div>
+            <div id="system-head-right" class="span6">
+                <a href="javascript:void(0);">@DateTime.UtcNow.ToString("HH:mm dd MMM yy")</a>
+                <a href="/Settings">
+                    <i class="icon-cog icon-white"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div id="app-body" class="container-fluid">
+        <div class="row-fluid">
+            <div id="channel-menu" class="span2">
+                <div class="sidebar-nav">
+                    <ul class="nav nav-list">
+                        <li @(Request.Url.PathAndQuery.StartsWith("/dashboard", StringComparison.OrdinalIgnoreCase) ? "class=active" : string.Empty)>
+                            <a href="/Dashboard"><i class="icon-th-large"></i> Dashboard</a>
+                        </li>
+                        <li @(Request.Url.PathAndQuery.StartsWith("/RabbitMQ", StringComparison.OrdinalIgnoreCase) ? "class=active" : string.Empty)>
+                            <a href="/RabbitMQ"><i class="icon-chevron-right"></i> RabbitMQ</a>
+                        </li>
+                        <li @(Request.Url.PathAndQuery.Equals("/Sends/Queue", StringComparison.OrdinalIgnoreCase) ? "class=active" : string.Empty)>
+                            <a href="/Sends/Queue"><i class="icon-time"></i> Queue</a>
+                        </li>
+                        <li @(Request.Url.PathAndQuery.StartsWith("/Sends", StringComparison.OrdinalIgnoreCase) &&
+                              !Request.Url.PathAndQuery.Equals("/Sends/Queue") ? "class=active" : string.Empty)>
+                            <a href="/Sends"><i class="icon-random"></i> Sends</a>
+                        </li>
+                        <li @(Request.Url.PathAndQuery.StartsWith("/Bounces", StringComparison.OrdinalIgnoreCase) ? "class=active" : string.Empty)>
+                            <a href="/Bounces"><i class="icon-remove"></i> Bounces</a>
+                        </li>
+                        <li @(Request.Url.PathAndQuery.StartsWith("/VirtualMTA", StringComparison.OrdinalIgnoreCase) ? "class=active" : string.Empty)>
+                            <a href="/VirtualMTA"><i class="icon-envelope"></i> Virtual MTAs</a>
+                        </li>
+                        <li @(Request.Url.PathAndQuery.StartsWith("/OutboundRules", StringComparison.OrdinalIgnoreCase) ? "class=active" : string.Empty)>
+                            <a href="/OutboundRules"><i class="icon-adjust"></i> Outbound Rules</a>
+                        </li>
+                        <li @(Request.Url.PathAndQuery.StartsWith("/ServerStatus", StringComparison.OrdinalIgnoreCase) ? "class=active" : string.Empty)>
+                            <a href="/ServerStatus"><i class="icon-tasks"></i> Server Status</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="channel" class="span10">
+                <div id="channel-content">
+                    <div class="row-fluid">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
